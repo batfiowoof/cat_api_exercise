@@ -8,18 +8,18 @@ const App = () => {
     setLoading(true);
 
     try {
-      // 📝 Подсказка 1: Направете Fetch заявка към API-то: "https://meowfacts.herokuapp.com/"
-      // 📝 Подсказка 2: Използвайте `await response.json()`, за да преобразувате резултата в JSON
-      // 📝 Подсказка 3: Вземете факта от `data.data[0]` и го запазете в `setFact()`
+      const response = await fetch("https://meowfacts.herokuapp.com/");
+      const data = await response.json();
+      setFact(data.data[0]);
     } catch (error) {
-      // 📝 Подсказка 4: Ако има грешка, я изведете в конзолата с `console.error()`
+      console.error("Грешка при зареждане на факт:", error);
     }
 
     setLoading(false);
   };
 
   useEffect(() => {
-    // 📝 Подсказка 5: Извикайте `fetchFact()`, за да заредите първоначалния факт при mount
+    fetchFact();
   }, []);
 
   return (
